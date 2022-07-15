@@ -1,3 +1,4 @@
 {
-    "baseUrl": "https://continium-erp-web-staging.herokuapp.com"
+    "baseUrl": "https://continium-erp-web-staging.herokuapp.com",
+    "uncaught": "exception"
 }
