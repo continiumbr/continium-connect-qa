@@ -1,28 +1,32 @@
 /// <reference types="cypress" />
-import erpAdmin from "../../fixtures/users/erpAdmin.json"
-const faker = require('faker')
-const randomEmail = faker.internet.email();
-const users = cypress._.range(1, 10).map((_, k) => {
-  return {
-
-    name: faker.name.findName(),
-    emaill: faker.internet.email(),
-    id: k,
-  }
-})
-console.table(users)
+let email = "admin@continium.com.br"
+let firstname = "Cypress"
+let lastname = "Teste1"
+let mail = "cypress@mail.com"
+// let password, confirmpassword = 123
+let password = 123
+let confirmpassword = password
 describe('Loga no sistema', () => {
   before(() => {
     cy.visit('/')
   
   })
-  it.only('Entra com conta válida', () => {
+  it('Entra com conta válida', () => {
     cy.get('#recovery-password').should('have.length', 1).within(() => { 
-      cy.get('#recovery-password_email').should('exist').type(erpAdmin.email)
+      cy.get('#recovery-password_email').should('exist').type(email)
       cy.get('#recovery-password_password').should('exist').type('123')
       cy.get('button').should('contain.text', 'Entrar').click()
     })
   })
+
+
+  it.skip('Exclui o item aberto', () => {
+    cy.wait(5000)
+    cy.get(':nth-child(7) > .sc-bdnxRM').click()
+    cy.get('.ant-btn-primary > span').should('contain.text', 'Sim').click()
+    cy.get('.ant-message-notice-content').should('contain.text', 'Item removido com sucesso')
+    })
+
 
   it('Adiciona um novo item', () => {
       cy.wait(5000)
@@ -41,7 +45,7 @@ describe('Loga no sistema', () => {
     cy.get('.ant-message-notice-content').should('exist')
     })
 
-      it.skip('Exclui o item aberto', () => {
+    it('Exclui o item aberto', () => {
       cy.wait(1000)
       cy.get(':nth-child(7) > .sc-bdnxRM').click()
       cy.get('.ant-btn-primary > span').should('contain.text', 'Sim').click()
